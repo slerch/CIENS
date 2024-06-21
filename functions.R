@@ -43,7 +43,8 @@ get_init <- function(tm, dir_path,
                      step_vec = 0:21,  
                      ens_vec = 1:20, 
                      met_vars = c("VMAX_10M"), 
-                     obs_vars = c("wind_speed_of_gust")){
+                     obs_vars = c("wind_speed_of_gust"),
+                     console = TRUE){
   ###-----------------------------------------------------------------------------
   ###Input
   #tm.............Initialization time of forecasts (time object)
@@ -63,6 +64,8 @@ get_init <- function(tm, dir_path,
   #met_vars.......Observational variables of interest (String vector)
   #...............Choose observational variable via name
   #...............Default: 1:20 -> All ensemble members
+  #console........Show current initialization as console output? (Logical)
+  #...............Default: TRUE -> Show output
   ###-----------------------------------------------------------------------------
   ###Output
   #res...Data frame with following columns:
@@ -76,7 +79,7 @@ get_init <- function(tm, dir_path,
   
   #### Initiation ####
   # Console output
-  print(paste0("--- Initialization: ", tm))
+  if(console){ print(paste0("--- Initialization: ", tm)) }
   
   # Load package
   library(ncdf4)
