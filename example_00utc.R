@@ -1,7 +1,7 @@
 ## CIENS: Generation of exemplary data frame
 ## 00 UTC forecasts
 
-
+#### Initialization ####
 # Path to Github repository functions
 git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 
@@ -9,8 +9,9 @@ git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 setwd(git_path)
 
 # Initiate
-source(file = paste0(getwd(), "/example_initiation.R"))
+source(file = paste0(getwd(), "/init_file.R"))
 
+#### Get data ####
 # Restrict to initialization times at 00 UTC
 tm_vec <- init_vec[hour(init_vec) == 00]
 
@@ -34,12 +35,13 @@ df <- bind_rows(lapply(tm_vec, function(x) get_init(tm = x,
                                                     location_vec = loc_vec,
                                                     step_vec = c(12:13),  
                                                     ens_vec = ens_vec)))
+## -> Save R-data for faster access
 
 # Calculate ensemble mean and standard deviation for each entry
 df[["VMAX_10M_mean"]] <- rowMeans(df[,paste0("VMAX_10M_", ens_vec)])
 df[["VMAX_10M_sd"]] <- apply(df[,paste0("VMAX_10M_", ens_vec)], 1, sd)
 
-### Generate verification rank histogram ###
+#### Generate verification rank histograms ####
 # Plot histograms for both stations and variables
 par(mfrow = c(1, 2))
 
@@ -66,7 +68,7 @@ for(temp_loc in loc_vec){
          col = "grey")
 }
 
-### Postprocessing application via EMOS ###
+#### Postprocessing via EMOS ####
 # Load EMOS functions
 source(file = paste0(git_path, "functions_emos.R"))
 
@@ -100,11 +102,12 @@ wg_emos_pred <- emos_pred(X = df_ka[i_test,],
                      par_emos = wg_emos_train$par)
 
 # Summary of CRPS
-summary(data.frame("Ensemble" = crps_ens, 
-                   "EMOS" = wg_emos_pred$scores$crps))
+summary(data.frame("Ensemble CRPS" = crps_ens, 
+                   "EMOS CRPS" = wg_emos_pred$scores$crps))
 
 # Skill score in percentage
-print(round(100*(1 - mean(wg_emos_pred$scores$crps)/mean(crps_ens)), 2))
+print(1 - mean(wg_emos_pred$scores$crps)/mean(crps_ens))
+## CRPS improvement by ~10%
 
 # Plot only PIT histogram
 par(mfrow = c(1, 1))

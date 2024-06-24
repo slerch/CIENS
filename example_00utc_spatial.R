@@ -2,6 +2,7 @@
 ## 00 UTC forecasts with spatial variables
 
 
+#### Initialization ####
 # Path to Github repository functions
 git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 
@@ -9,8 +10,9 @@ git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 setwd(git_path)
 
 # Initiate
-source(file = paste0(getwd(), "/example_initiation.R"))
+source(file = paste0(getwd(), "/init_file.R"))
 
+#### Get data ####
 # Restrict to initialization times at 00 UTC
 tm_vec <- init_vec[hour(init_vec) == 00]
 
@@ -34,6 +36,7 @@ df <- bind_rows(lapply(tm_vec, function(x) get_init(tm = x,
                                                     location_vec = loc_vec,
                                                     step_vec = c(18:21),  
                                                     ens_vec = ens_vec)))
+## -> Save R-data for faster access
 
 # For-Loop over meteorological variables
 for(temp_var in met_vars){
@@ -42,7 +45,7 @@ for(temp_var in met_vars){
   df[[paste0(temp_var, "_sd")]] <- apply(df[,paste0(temp_var, "_", ens_vec)], 1, sd)
 }
 
-### Calculate scores ###
+#### Calculate scores ####
 # Calculate CRPS values of station forecast and spatial forecast
 crps0 <- crps_sample(y = df[,"wind_speed_of_gust"], 
                      dat = as.matrix(df[,paste0("VMAX_10M_", 1:n_ens)]))
@@ -51,12 +54,22 @@ crps_spatial <- crps_sample(y = df[,"wind_speed_of_gust"],
 
 # Summary of results
 df_eval <- data.frame("crps_local" = crps0, "crps_spatial" = crps_spatial, 
-                      "ens_sd_local" = df[["VMAX_10M_sd"]], "ens_sd_spatial" = df[["VMAX_10M_MS_sd"]])
+                      "crps_diff" = crps0 - crps_spatial, 
+                      "ens_sd_local" = df[["VMAX_10M_sd"]], "ens_sd_spatial" = df[["VMAX_10M_MS_sd"]], 
+                      "ens_sd_diff" = df[["VMAX_10M_sd"]] - df[["VMAX_10M_MS_sd"]])
+
+# Plot boxplot
+par(mfrow = c(1, 1))
 
 # Boxplots without outliers
 boxplot(df_eval, outline = FALSE)
 
-### Generate verification rank histogram ###
+# Equal values
+abline(h = 0, 
+       lty = 2, 
+       col = "grey")
+
+#### Generate verification rank histograms ####
 # Plot histograms for both stations and variables
 par(mfrow = c(1, 2))
 

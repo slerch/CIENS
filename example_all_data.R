@@ -2,6 +2,7 @@
 ## Both initialization times with spatial variables
 
 
+#### Initialization ####
 # Path to Github repository functions
 git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 
@@ -9,8 +10,9 @@ git_path <- "C:/Users/schulz/Documents/GitHub/CIENS/"
 setwd(git_path)
 
 # Initiate
-source(file = paste0(getwd(), "/example_initiation.R"))
+source(file = paste0(getwd(), "/init_file.R"))
 
+#### Get data ####
 # Define period of initialization times
 tm_vec <- init_vec[(year(init_vec) == 2015) | (year(init_vec) == 2016)]
 
@@ -31,8 +33,9 @@ df <- bind_rows(lapply(tm_vec, function(x) get_init(tm = x,
                                                     location_vec = loc_vec,
                                                     step_vec = c(12:14),  
                                                     ens_vec = ens_vec)))
+## -> Save R-data for faster access
 
-# OMit missing values
+# Omit missing values
 df <- na.omit(df)
 
 # For-Loop over meteorological variables
@@ -42,6 +45,7 @@ for(temp_var in met_vars){
   df[[paste0(temp_var, "_sd")]] <- apply(df[,paste0(temp_var, "_", ens_vec)], 1, sd)
 }
 
+#### Calculate scores ####
 # Calculate CRPS values of station forecast and spatial forecast
 crps_wg <- crps_sample(y = df[,"wind_speed_of_gust"], 
                        dat = as.matrix(df[,paste0("VMAX_10M_", 1:n_ens)]))
@@ -52,6 +56,7 @@ crps_t2m <- crps_sample(y = df[,"air_temperature"],
 summary(data.frame("wg_crps" = crps_wg, "t2m_crps" = crps_t2m, 
                    "wg_sd" = df[["VMAX_10M_sd"]], "wg_t2m" = df[["T_2M_sd"]]))
 
+#### Generate verification rank histograms ####
 # Plot verification rank histograms for both variables
 par(mfrow = c(1, 2))
 
@@ -82,15 +87,22 @@ for(temp_var in obs_vars){
          col = "grey")
 }
 
-### Postprocessing via EMOS ###
+#### Postprocessing via EMOS ####
+# Load EMOS functions
+source(file = paste0(git_path, "functions_emos.R"))
+
 # Consider only Karlsruhe and 12 hour
 df_ka <- subset(df, (location == "10731") & (step == 12))
 
+# Split in training (2015) and test period (2016)
+i_train <- which(year(df_ka[["init_tm"]]) == 2015)
+i_test <- which(year(df_ka[["init_tm"]]) == 2016)
+
 ## Temperature postprocessing
-# Train EMOS model using wind gust ensemble predictions
+# Train EMOS model using temperature and wind gust predictions
 tp_emos_train <- emos_est(train = df_ka[i_train,],
                           loc_pred = "T_2M_mean",
-                          scale_pred = "VMAX_10M_mean", # Use gusts as predictor
+                          scale_pred = "VMAX_10M_mean", # Use gusts as predictor for scale
                           target = "air_temperature",
                           distr = "norm")
 
@@ -110,7 +122,8 @@ crps_ens <- crps_sample(y = df_ka[i_test, "air_temperature"],
                         dat = as.matrix(df_ka[i_test, paste0("T_2M_", 1:n_ens)]))
 
 # Summary of CRPS via boxplot of differences
-boxplot(crps_ens- tp_emos_pred$scores$crps)
+boxplot(crps_ens-tp_emos_pred$scores$crps)
+## Positive values indicate improvement
 
 # Equal performance
 abline(h = 0, 
@@ -118,7 +131,8 @@ abline(h = 0,
        col = "grey")
 
 # Skill in percentage
-print(100*round(1 - mean(tp_emos_pred$scores$crps)/mean(crps_ens), 4))
+print(1 - mean(tp_emos_pred$scores$crps)/mean(crps_ens))
+## CRPS improvement by ~4%
 
 # Generate PIT histograms
 hist(tp_emos_pred$scores$pit,

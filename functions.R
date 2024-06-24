@@ -5,6 +5,11 @@
 ## - dplyr
 ## - lubridate
 
+# Load package
+library(ncdf4)
+library(dplyr)
+library(lubridate)
+
 # Function that converts string format of the data to time
 str2time <- function(str_tm, tm_format = "%Y%m%d%H"){
   ###-----------------------------------------------------------------------------
@@ -80,11 +85,6 @@ get_init <- function(tm, dir_path,
   #### Initiation ####
   # Console output
   if(console){ print(paste0("--- Initialization: ", tm)) }
-  
-  # Load package
-  library(ncdf4)
-  library(dplyr)
-  library(lubridate)
   
   # Path to observational data
   obs_path <- paste0(dir_path, "observations/")
