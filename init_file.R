@@ -7,7 +7,7 @@ data_path <- "F:/W2W_C5/publication_data/"
 source(file = paste0(getwd(), "/functions.R"))
 
 # Load additional data
-load(file = paste0(getwd(), "/ciens_meta_data.RData"))
+load(file = paste0(getwd(), "/ciens_info.RData"))
 
 # Load packages
 library(lubridate)

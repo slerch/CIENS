@@ -10,19 +10,17 @@ Abstract:
 
 > Abstract...
 
-In this repository, we describe the structure of the data and provide exemplary R-code for working with the data.
+In this repository, we describe the structure of the data and provide exemplary R-code for using the data.
 
 
 ## Structure within data platform
 
-The data set divided into an empty head data sets and four data sets, each with its own DOI:
+The data set divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
 
-| Name | DOI | Run | Variables | Observations |
-| ---- | ----------- | 
-| `CIENS - Run 00 UTC` | [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH) | 00 UTC | Standard | Yes |
-| `CIENS - Run 00 UTC - Spatial Variables` | [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt) | 00 UTC | Spatial | No |
-| `CIENS - Run 12 UTC` | [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC) | 12 UTC | Standard | Yes |
-| `CIENS - Run 12 UTC - Spatial Variables` | [10.35097/rJZCZYljpSReTWNL](https://dx.doi.org/10.35097/rJZCZYljpSReTWNL) | 12 UTC | Spatial | No |
+- `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
+- `CIENS - Run 00 UTC - Spatial Variables`, DOI: [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt)
+- `CIENS - Run 12 UTC`, observational data included; DOI: [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC)
+- `CIENS - Run 12 UTC - Spatial Variables`, DOI: [10.35097/rJZCZYljpSReTWNL](https://dx.doi.org/10.35097/rJZCZYljpSReTWNL)
 
 
 ## Structure of data sets
@@ -37,14 +35,14 @@ Description observational data base.
 This repository includes code and data accompanying the CIENS data set. The following scripts are included:
 
 | File | Description |
-| ---- | ----------- | 
+| ---- | ----------- |
+| `init_file.R` | Initializes paths, packages and standard variables. |
+| `ciens_info.Rdata` | Includes informationnal variables on the CIENS data set such as a vector of all available initialization times and location data. |
+| `functions.R` | Functions for extracting data from netCDF-files in R-dataframes. |
+| `functions_emos.R` | Functions for postprocessing via EMOS. |
 | `example_00utc.R` | Example based on the 00 UTC data including postprocessing application via EMOS. |
 | `example_00utc_spatial.R` | Example based on the 00 UTC data with spatial variables. |
 | `example_all_data.R` | Example based on all data sets including postprocessing application via EMOS. |
-| `functions.R` | Functions for extracting data from netCDF-files in R-dataframes. |
-| `functions_emos.R` | Functions for postprocessing via EMOS. |
-| `init_file.R` | Initializes paths, packages and standard variables. |
-| `ciens_info.R` | Includes informationnal variables on the CIENS data set such as a vector of all available initialization times and location data. |
 
 The location data includes the name of the stations, their coordinates, their height and the height of the closest grid point (referred to as "orog_DE" and "orog_D2" for the corresponding model versions).
 
@@ -53,15 +51,16 @@ The location data includes the name of the stations, their coordinates, their he
 
 The CIENS data set contains operational convection-permitting COSMO/ICON ensemble predictions of various meteorological variables at German observation sites. An overview is presented in the following table:
 
-| Locations | xxx stations in Germany |
-| Resolution | 2.8 km (DE; until xx/xx/xxxx), 2.2 km (D2; afterwards) |
-| Variables | xx meteorological variables |
+| Locations | 170 stations in Germany |
+| Resolution | 2.8 km (DE; until 15/05/2018), 2.2 km (D2; afterwards) |
+| Meteorological variables | 55 |
 | Time range | 08/12/2010 - 30/06/2023 |
-| Initialization hours | 00 and 12 UTC |
-| Forecast lead times | 0-21 hours |
+| Initialization | Daily at 00 and 12 UTC |
+| Number of initializationss | 9150 |
+| Forecast lead times | 0, 1, ..., 21 hours |
 | Forecast derivation | Forecast from closest grid cell  |
 
-The data sets are separated between so-called standard and spatial variables. We refer to standard variables as the meteorological variables taken from the closest grid point, while the spatial variables refer to summary statistics of surrounding grid cells. Both for the surrounding 11x11 (referred to via "_MS") and 22x22 (via "_LS" resp.) grid cells the mean and standard deviation (referred to via "_SD") of the meteorological variables are calculated.
+The data sets are separated between so-called standard and spatial variables. We refer to standard variables as the meteorological variables taken from the closest grid point, while the spatial variables refer to summary statistics of surrounding grid cells. Both for the surrounding 11x11 (referred to via "_MS") and 22x22 (via "_LS" resp.) grid cells the mean and standard deviation (referred to via "_S") of the meteorological variables are calculated.
 
 Forecasts are available for the following variables:
 
