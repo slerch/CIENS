@@ -51,45 +51,42 @@ The location data includes the name of the stations, their coordinates, their he
 
 The CIENS data set contains operational convection-permitting COSMO/ICON ensemble predictions of various meteorological variables at German observation sites. An overview is presented in the following table:
 
-| Locations | 170 stations in Germany |
-| Resolution | 2.8 km (DE; until 15/05/2018), 2.2 km (D2; afterwards) |
-| Meteorological variables | 55 |
-| Time range | 08/12/2010 - 30/06/2023 |s
-| Initialization | Daily at 00 and 12 UTC |
-| Number of initializationss | 9150 |
-| Forecast lead times | 0, 1, ..., 21 hours |
-| Forecast derivation | Forecast from closest grid cell  |
+- 170 SYNOP stations in Germany
+- Resolution: 2.8 km until 15/05/2018 (DE), 2.2 km afterwards (D2)
+- 55 Meteorological variables
+- Time range: 08/12/2010 - 30/06/2023
+- Models are initialized daily at 00 and 12 UTC
+- Number of initializations: 9150
+- Forecast lead times: 0, 1, ..., 21 hours
+- Forecast are taken from closest grid cell
 
 The data sets are separated between so-called standard and spatial variables. We refer to standard variables as the meteorological variables taken from the closest grid point, while the spatial variables refer to summary statistics of surrounding grid cells. Both for the surrounding 11x11 (referred to via "_MS") and 22x22 (via "_LS" resp.) grid cells the mean and standard deviation (referred to via "_S") of the meteorological variables are calculated.
 
 Forecasts are available for the following variables:
 
-| Abbreviation | Decription | Spatial? |
-| ---- | ----------- | 
-| `VMAX` | m/s | Maximum wind, i.e.\ wind gusts (10m) |
-| `U` | m/s | U-component of wind (10m, 500--1,000 hPa) |
-| `V` | m/s | V-component of wind (10m, 500--1,000 hPa) |
-| `OMEGA` | Pa/s | Vertical velocity (Pressure) (500--1,000 hPa) |
-| `T` | K | Temperature (Ground-level, 2m, 500--1,000 hPa) |
-| `TD` | K | Dew point temperature (2m) |
-| `RELHUM` | % | Relative humidity (500--1,000 hPa) |
-| `TOT_PREC` | kg/m^2 | Total precipitation (Accumulation) |
-| `RAIN_GSP` | kg/m^2 | Large scale rain (Accumulation) |
-| `SNOW_GSP` | kg/m^2 | Large scale snowfall - water equivalent (Accumulation) |
-| `W_SNOW` | kg/m^2 | Snow depth water equivalent |
-| `W_SO` | kg/m^2 | Column integrated soil moisture (multilayers; 1, 2, 6, 18, 54) |
-| `CLCT` | % | Total cloud cover |
-| `CLCL` | % | Cloud cover (800 hPa - soil) |
-| `CLCM` | % | Cloud cover (400 hPa - 800 hPa) |
-| `CLCH` | % | Cloud cover (000 hPa - 400 hPa) |
-| `HBAS_SC` | m | Cloud base above mean sea level, shallow connection |
-| `HTOP_SC` | m | Cloud top above mean sea level, shallow connection |
-| `ASOB_S` | W/m^2 | Net short wave radiation flux (at the surface) |
-| `ATHB_S` | W/m^2 | Net long wave radiation flux (m) (at the surface) |
-| `ALB_RAD` | % | Albedo (in short-wave) |
-| `PMSL` | Pa | Pressure reduced to mean sea level |
-| `FI` | m^2/s^2 | Geopotential (500--1,000 hPa) |
-+
+| Abbreviation | Unit | Full name | Levels | Spatial |
+| --- | --- | --- | --- |  --- | 
+| `VMAX` | m/s | Maximum wind, i.e., wind gusts | 10m | Yes |
+| `U` | m/s | U-component of wind | 10m, 1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa | 10m |
+| `V` | m/s | V-component of wind | 10m, 1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa | 10m |
+| `OMEGA` | Pa/s | Vertical velocity (Pressure) | 1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa | No |
+| `T` | K | Temperature | Ground-level, 2m, 1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa | Ground-level, 2m |
+| `TD` | K | Dew point temperature | 2m | Yes |
+| `RELHUM` | % | Relative humidity |  1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa | No |
+| `TOT_PREC` | kg/m^2 | Total precipitation (Accumulation) | - | Yes |
+| `RAIN_GSP` | kg/m^2 | Large scale rain (Accumulation) | - | Yes |
+| `SNOW_GSP` | kg/m^2 | Large scale snowfall - water equivalent (Accumulation) | - | Yes |
+| `W_SNOW` | kg/m^2 | Snow depth water equivalent | - | Yes |
+| `W_SO` | kg/m^2 | Column integrated soil moisture | Multilayers; 1, 2, 6, 18, 54 | No |
+| `CLCT` | % | Total cloud cover | `T`: Total, `L`: 800 hPa - soil, `M`: 400 hPa - 800 hPa, `H`: 000 hPa - 400 hPa | Yes |
+| `HBAS_SC` | m | Cloud base above mean sea level, shallow connection | - | Yes |
+| `HTOP_SC` | m | Cloud top above mean sea level, shallow connection | - | Yes |
+| `ASOB_S` | W/m^2 | Net short wave radiation flux | Surface | Yes |
+| `ATHB_S` | W/m^2 | Net long wave radiation flux (m) | Surface | Yes |
+| `ALB_RAD` | % | Albedo (in short-wave) | - | Yes |
+| `PMSL` | Pa | Pressure reduced to mean sea level | - | Yes |
+| `FI` | m^2/s^2 | Geopotential |1,000 hPa, 950 hPa, 850 hPa, 700 hPa, 500 hPa |  No |
+
 Observations are available for the following variables:
 
 | Name | Decription |
