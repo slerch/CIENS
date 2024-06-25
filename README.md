@@ -51,16 +51,19 @@ The location data includes the name of the stations, their coordinates, their he
 
 The CIENS data set contains operational convection-permitting COSMO/ICON ensemble predictions of various meteorological variables at German observation sites. An overview is presented in the following table:
 
+- 20 ensemble members
+- 55 forecast variables
+- 6 observational variables
 - 170 SYNOP stations in Germany
-- Resolution: 2.8 km until 15/05/2018 (DE), 2.2 km afterwards (D2)
-- 55 Meteorological variables
 - Time range: 08/12/2010 - 30/06/2023
 - Models are initialized daily at 00 and 12 UTC
 - Number of initializations: 9150
 - Forecast lead times: 0, 1, ..., 21 hours
+- Resolution: 2.8 km until 15/05/2018 (DE), 2.2 km afterwards (D2)
 - Forecast are taken from closest grid cell
+- Before KENDA (introduced on 21/03/2017) ensemble members are divided in four sub-groups, after KENDA the members are exchangeable
 
-The data sets are separated between so-called standard and spatial variables. We refer to standard variables as the meteorological variables taken from the closest grid point, while the spatial variables refer to summary statistics of surrounding grid cells. Both for the surrounding 11x11 (referred to via "_MS") and 22x22 (via "_LS" resp.) grid cells the mean and standard deviation (referred to via "_S") of the meteorological variables are calculated.
+The data sets are separated between so-called standard and spatial variables. We refer to standard variables as the meteorological variables taken from the closest grid point, while the spatial variables refer to summary statistics of surrounding grid cells. Both for the surrounding 11x11 (medium scale; referred to via "_MS") and 22x22 (large scale; via "_LS" resp.) grid cells the mean and standard deviation (referred to via "_S") of the meteorological variables are calculated.
 
 Forecasts are available for the following variables:
 
@@ -89,11 +92,11 @@ Forecasts are available for the following variables:
 
 Observations are available for the following variables:
 
-| Name | Decription |
-| ---- | ----------- | 
-| `wind_speed_of_gust` | Wind gusts | 
-| `wind_speed` | Wind speed | 
-| `wind_from_direction` | Wind direction | 
-| `precipitation_amount` | Precipitation amount (hourly) | 
-| `air_temperature` | Air temperature | 
-| `air_pressure` | Air pressure | 
+| Variable | Name | Unit |
+| ---- | ----------- |  --- |
+| `wind_speed_of_gust` | Wind gusts |  m/s |
+| `wind_speed` | Wind speed |  m/s |
+| `wind_from_direction` | Wind direction | Degree |
+| `precipitation_amount` | Precipitation amount (hourly) |  kg/m^2 |
+| `air_temperature` | Air temperature |  K |
+| `air_pressure` | Air pressure |  Pa |
