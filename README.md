@@ -15,7 +15,7 @@ In this repository, we describe the structure of the data and provide exemplary 
 
 ## Structure within data platform
 
-The data set divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
+The data set is divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
 
 - `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
 - `CIENS - Run 00 UTC - Spatial Variables`, DOI: [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt)
@@ -25,9 +25,9 @@ The data set divided into four data sets, which are connected by an empty head "
 
 ## Structure of data sets
 
-Each of the four parts has the same directory structure. For each initialization time within the time period of the CIENS data set, one netCDF-file is available, which includes the full ensemble forecasts of all meteorological variables (standard or spatial) for all locations and lead times. The files are grouped in monthly folders, i.e., for each month including an initialization time one folder exists.
+Each of the four parts has the same directory structure. For each initialization time available, one netCDF-file is given, which includes the full ensemble forecasts of all meteorological variables (standard or spatial) for all locations and lead times. The files are grouped in monthly folders, i.e., for each month including an initialization time one folder exists.
 
-Description observational data base.
+The two standard variable data sets also include the corresponding observations. For each year, one netcdf-file is given, which includes observations of six variables for each hour of the year and the forecast locations. Note that the observational data sets for the 00 and 12 UTC are identical and include observations for all hours of the year.
 
 
 ## Code description
@@ -54,7 +54,7 @@ The CIENS data set contains operational convection-permitting COSMO/ICON ensembl
 | Locations | 170 stations in Germany |
 | Resolution | 2.8 km (DE; until 15/05/2018), 2.2 km (D2; afterwards) |
 | Meteorological variables | 55 |
-| Time range | 08/12/2010 - 30/06/2023 |
+| Time range | 08/12/2010 - 30/06/2023 |s
 | Initialization | Daily at 00 and 12 UTC |
 | Number of initializationss | 9150 |
 | Forecast lead times | 0, 1, ..., 21 hours |
@@ -89,7 +89,7 @@ Forecasts are available for the following variables:
 | `ALB_RAD` | % | Albedo (in short-wave) |
 | `PMSL` | Pa | Pressure reduced to mean sea level |
 | `FI` | m^2/s^2 | Geopotential (500--1,000 hPa) |
-
++
 Observations are available for the following variables:
 
 | Name | Decription |
