@@ -1,33 +1,34 @@
 # Operational convection-permitting COSMO/ICON ensemble predictions at observation sites (CIENS)
 
-This repository provides R-code and descriptions accompanying the CIENS data set:
+This repository provides R code and descriptions accompanying the CIENS data set:
 
-> Schulz, B. and Lerch, S. (2024). 
+> Schulz, B., Hess, R., Möller, A., Primo. C., Theis, S., Trepte, S. and Lerch, S. (2024). 
 > Operational convection-permitting COSMO/ICON ensemble predictions at observation sites (CIENS). 
 >  Karlsruhe Institute of Technology. https://doi.org/10.35097/EOvvQEsgILoXpYTK.
 
-Abstract:
+A detailed documentation is available in the accompanying paper:
 
-> Abstract...
+> ... Paper link ... 
 
 In this repository, we describe the structure of the data and provide exemplary R-code for using the data.
 
 
 ## Structure within data platform
 
-The data set is divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
+The CIENS data is divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
 
 - `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
 - `CIENS - Run 00 UTC - Spatial Variables`, DOI: [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt)
 - `CIENS - Run 12 UTC`, observational data included; DOI: [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC)
 - `CIENS - Run 12 UTC - Spatial Variables`, DOI: [10.35097/rJZCZYljpSReTWNL](https://dx.doi.org/10.35097/rJZCZYljpSReTWNL)
 
+To cite the CIENS data, you can either refer to the DOI listed in the main reference [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/EOvvQEsgILoXpYTK), or refer to the specific part of the data you used via the DOIs listed above.
 
 ## Structure of data sets
 
-Each of the four parts has the same directory structure. For each initialization time available, one netCDF-file is given, which includes the full ensemble forecasts of all meteorological variables (standard or spatial) for all locations and lead times. The files are grouped in monthly folders, i.e., for each month including an initialization time one folder exists.
+Each of the four data sets has the same directory structure. For each initialization time available, one netCDF-file is given, which includes the full ensemble forecasts of all meteorological variables (standard or spatial) for all locations and lead times. The files are grouped in monthly folders, i.e., for each month including an initialization time one folder exists.
 
-The two standard variable data sets also include the corresponding observations. For each year, one netcdf-file is given, which includes observations of six variables for each hour of the year and the forecast locations. Note that the observational data sets for the 00 and 12 UTC are identical and include observations for all hours of the year.
+The two standard variable data sets also include the corresponding observations. For each year, one netCDF-file is given, which includes observations of six variables for each hour of the year and the forecast locations. Note that the observational data sets for the 00 and 12 UTC are identical and include observations for all hours of the year.
 
 
 ## Code description
@@ -100,3 +101,14 @@ Observations are available for the following variables:
 | `precipitation_amount` | Precipitation amount (hourly) |  kg/m^2 |
 | `air_temperature` | Air temperature |  K |
 | `air_pressure` | Air pressure |  Pa |
+
+
+## Publications using the CIENS data
+
+In the following, we list publications that use (parts of) the CIENS data. To add your own publication to the list, please contact us directly or open an issue here on Github. 
+
+| Reference | Description |
+| ---- | ----------- | 
+| [Pantillon et al. (2018, QJRMS)](https://doi.org/10.1002/qj.3380) | Error analysis and post-processing for wind gusts, with a specific focus on winter storms |
+| [Schulz and Lerch (2022, MWR)](https://doi.org/10.1175/MWR-D-21-0150.1) | Development and systematic comparison of statistical and machine learning methods for post-processing wind gust forecasts |
+| [Primo et al. (2024, arXiv:2401.11896)](https://doi.org/10.48550/arXiv.2401.11896) | Comparison of model output statistics and neural network methods for post-processing wind gust forecasts |
