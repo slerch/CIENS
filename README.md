@@ -17,7 +17,7 @@ In this repository, we describe the structure of the data and provide exemplary 
 
 The CIENS data is divided into four data sets, which are connected by an empty head "data set". Each of the five parts has its own DOI. The four data sets are listed in the following:
 
-- `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
+- `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/zzfEJPxDILXwSNPH](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
 - `CIENS - Run 00 UTC - Spatial Variables`, DOI: [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt)
 - `CIENS - Run 12 UTC`, observational data included; DOI: [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC)
 - `CIENS - Run 12 UTC - Spatial Variables`, DOI: [10.35097/rJZCZYljpSReTWNL](https://dx.doi.org/10.35097/rJZCZYljpSReTWNL)
