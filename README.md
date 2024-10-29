@@ -44,6 +44,7 @@ This repository includes code and data accompanying the CIENS data set. The foll
 | `example_all_data.R` | Example based on all data sets including postprocessing application via EMOS. Requires all four data sets. |
 
 The location data includes the name of the stations, their coordinates, their height and the height of the closest grid point (referred to as "orog_DE" and "orog_D2" for the corresponding model versions).
+
 The code in example_00utc_spatial requires two of above listed data sets, while example_all_data requires all four of the above listed data sets. Make sure you have downloaded all required data sets into the same master folder, otherwise the example code will not run properly. 
 
 
