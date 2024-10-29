@@ -19,7 +19,7 @@ The CIENS data is divided into four data sets, which are connected by an empty h
 
 - `CIENS - Run 00 UTC`, observational data included; DOI: [10.35097/zzfEJPxDILXwSNPH](https://dx.doi.org/10.35097/zzfEJPxDILXwSNPH)
 - `CIENS - Run 00 UTC - Spatial Variables`, DOI: [10.35097/wVDXkDCGnBgFuuGt](https://dx.doi.org/10.35097/wVDXkDCGnBgFuuGt)
-- `CIENS - Run 12 UTC`, observational data included; DOI: [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC)
+- `CIENS - Run 12 UTC`, DOI: [10.35097/JKALdQqqLIjGUOBC](https://dx.doi.org/10.35097/JKALdQqqLIjGUOBC)
 - `CIENS - Run 12 UTC - Spatial Variables`, DOI: [10.35097/rJZCZYljpSReTWNL](https://dx.doi.org/10.35097/rJZCZYljpSReTWNL)
 
 To cite the CIENS data, you can either refer to the DOI listed in the main reference [10.35097/EOvvQEsgILoXpYTK](https://dx.doi.org/10.35097/EOvvQEsgILoXpYTK), or refer to the specific part of the data you used via the DOIs listed above.
@@ -28,24 +28,23 @@ To cite the CIENS data, you can either refer to the DOI listed in the main refer
 
 Each of the four data sets has the same directory structure. For each initialization time available, one netCDF-file is given, which includes the full ensemble forecasts of all meteorological variables (standard or spatial) for all locations and lead times. The files are grouped in monthly folders, i.e., for each month including an initialization time one folder exists.
 
-The two standard variable data sets also include the corresponding observations. For each year, one netCDF-file is given, which includes observations of six variables for each hour of the year and the forecast locations. Note that the observational data sets for the 00 and 12 UTC are identical and include observations for all hours of the year.
-
-
+The 00 UTC standard variable data set also includes the corresponding observations. For each year, one netCDF-file is given, which includes observations of six variables for each hour of the year and the forecast locations. 
 ## Code description
 
 This repository includes code and data accompanying the CIENS data set. The following scripts are included:
 
 | File | Description |
 | ---- | ----------- |
-| `init_file.R` | Initializes paths, packages and standard variables. |
-| `ciens_info.Rdata` | Includes informationnal variables on the CIENS data set such as a vector of all available initialization times and location data. |
-| `functions.R` | Functions for extracting data from netCDF-files in R-dataframes. |
-| `functions_emos.R` | Functions for postprocessing via EMOS. |
-| `example_00utc.R` | Example based on the 00 UTC data including postprocessing application via EMOS. |
-| `example_00utc_spatial.R` | Example based on the 00 UTC data with spatial variables. |
-| `example_all_data.R` | Example based on all data sets including postprocessing application via EMOS. |
+| `init_file.R` | Initializes paths, packages, R functions and standard variables. |
+| `ciens_info.Rdata` | Includes informational variables on the CIENS data set such as a vector of all available initialization times, forecast steps, and ensemble members, as well names of available variables and location data. |
+| `functions.R` | Functions for extracting data from netCDF-files in R-data.frames. |
+| `functions_emos.R` | Functions for postprocessing via EMOS as well as probabilistic forecast verification based on R packages crch and scoringRules. |
+| `example_00utc.R` | Example based on the 00 UTC data including postprocessing application via EMOS. Requires only 00 UTC standard variable data set. |
+| `example_00utc_spatial.R` | Example based on the 00 UTC data with spatial variables. Requires additionally the 00 UTC standard variable data set. |
+| `example_all_data.R` | Example based on all data sets including postprocessing application via EMOS. Requires all four data sets. |
 
 The location data includes the name of the stations, their coordinates, their height and the height of the closest grid point (referred to as "orog_DE" and "orog_D2" for the corresponding model versions).
+The code in example_00utc_spatial requires two of above listed data sets, while example_all_data requires all four of the above listed data sets. Make sure you have downloaded all required data sets into the same master folder, otherwise the example code will not run properly. 
 
 
 ## Content of data set
