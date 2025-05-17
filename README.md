@@ -39,9 +39,12 @@ This repository includes code and data accompanying the CIENS data set. The foll
 | `ciens_info.Rdata` | Includes informational variables on the CIENS data set such as a vector of all available initialization times, forecast steps, and ensemble members, as well names of available variables and location data. |
 | `functions.R` | Functions for extracting data from netCDF-files in R-data.frames. |
 | `functions_emos.R` | Functions for postprocessing via EMOS as well as probabilistic forecast verification based on R packages crch and scoringRules. |
+| `functions_emos_bst.R` | Functions for postprocessing via EMOS-GB as well as probabilistic forecast verification based on R packages crch and scoringRules. |
 | `example_00utc.R` | Example based on the 00 UTC data including postprocessing application via EMOS. Requires only 00 UTC standard variable data set. |
 | `example_00utc_spatial.R` | Example based on the 00 UTC data with spatial variables. Requires additionally the 00 UTC standard variable data set. |
 | `example_all_data.R` | Example based on all data sets including postprocessing application via EMOS. Requires all four data sets. |
+| `example_00utc_12h_postprocessing_windgust.R` | Postprocessing example from the CIENS paper for wind gusts based on a subset of the data for 00 UTC and 12h lead time. EMOS and 2 variants of EMOS-GB are fitted and evaluated on test data, verification scores are computed. Requires standard and spatial data sets for 00 UTC.|
+| `analysis_00utc_12h_postprocessing_windgus.R` | Postprocessing example from the CIENS paper for wind gusts based on a subset of the data for 00 UTC and 12h lead time. Based on the postprocessing performed in the previous file aggregated scores, skill scores, and feature importance are obtained and the results presented in figures. Requires output from previous file.|
 
 The location data includes the name of the stations, their coordinates, their height and the height of the closest grid point (referred to as "orog_DE" and "orog_D2" for the corresponding model versions).
 
